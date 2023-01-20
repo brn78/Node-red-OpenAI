@@ -1,0 +1,424 @@
+[
+    {
+        "id": "6ecf9ef35e876818",
+        "type": "subflow",
+        "name": "OpenAI Completions",
+        "info": "msg.openai_prompt = {string} contenuto del messaggio\r\nmsg.openai_user {string} user id utente\r\nmsg.openai_first_name {string} nome utente",
+        "category": "OpenAI",
+        "in": [
+            {
+                "x": 50,
+                "y": 90,
+                "wires": [
+                    {
+                        "id": "38baeffe6a51f2b7"
+                    },
+                    {
+                        "id": "afca6b9d0456255d"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 540,
+                "y": 90,
+                "wires": [
+                    {
+                        "id": "a9f614a56d802d07",
+                        "port": 0
+                    },
+                    {
+                        "id": "3bb5366586afc80e",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 530,
+                "y": 150,
+                "wires": [
+                    {
+                        "id": "cca45c846042e040",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [
+            {
+                "name": "url",
+                "type": "str",
+                "value": "https://api.openai.com/v1/completions",
+                "ui": {
+                    "icon": "font-awesome/fa-external-link",
+                    "label": {
+                        "en-US": "Url:"
+                    },
+                    "type": "input",
+                    "opts": {
+                        "types": [
+                            "str"
+                        ]
+                    }
+                }
+            },
+            {
+                "name": "apikey",
+                "type": "str",
+                "value": "",
+                "ui": {
+                    "icon": "font-awesome/fa-key",
+                    "label": {
+                        "en-US": "API Key:"
+                    },
+                    "type": "input",
+                    "opts": {
+                        "types": [
+                            "str"
+                        ]
+                    }
+                }
+            },
+            {
+                "name": "model",
+                "type": "str",
+                "value": "text-davinci-003",
+                "ui": {
+                    "icon": "font-awesome/fa-asterisk",
+                    "label": {
+                        "en-US": "Model:"
+                    },
+                    "type": "select",
+                    "opts": {
+                        "opts": [
+                            {
+                                "l": {
+                                    "en-US": "davinci (4.000 tokens)"
+                                },
+                                "v": "text-davinci-003"
+                            },
+                            {
+                                "l": {
+                                    "en-US": "curie (2,048 tokens)"
+                                },
+                                "v": "text-curie-001"
+                            },
+                            {
+                                "l": {
+                                    "en-US": "babbage (2,048 tokens)"
+                                },
+                                "v": "text-babbage-001"
+                            },
+                            {
+                                "l": {
+                                    "en-US": "ada (2,048 tokens)"
+                                },
+                                "v": "text-ada-001"
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "name": "prompt",
+                "type": "str",
+                "value": "",
+                "ui": {
+                    "icon": "font-awesome/fa-file-text-o",
+                    "label": {
+                        "en-US": "Prompt:"
+                    },
+                    "type": "input",
+                    "opts": {
+                        "types": [
+                            "str"
+                        ]
+                    }
+                }
+            },
+            {
+                "name": "prompt_length",
+                "type": "num",
+                "value": "10",
+                "ui": {
+                    "icon": "font-awesome/fa-sort-numeric-asc",
+                    "label": {
+                        "en-US": "Prompt length:"
+                    },
+                    "type": "input",
+                    "opts": {
+                        "types": [
+                            "num"
+                        ]
+                    }
+                }
+            },
+            {
+                "name": "max_tokens",
+                "type": "num",
+                "value": "16",
+                "ui": {
+                    "icon": "font-awesome/fa-asterisk",
+                    "label": {
+                        "en-US": "Max tokens:"
+                    },
+                    "type": "input",
+                    "opts": {
+                        "types": [
+                            "num"
+                        ]
+                    }
+                }
+            },
+            {
+                "name": "temperature",
+                "type": "num",
+                "value": "0.9",
+                "ui": {
+                    "icon": "font-awesome/fa-asterisk",
+                    "label": {
+                        "en-US": "Temperature:"
+                    },
+                    "type": "input",
+                    "opts": {
+                        "types": [
+                            "num"
+                        ]
+                    }
+                }
+            },
+            {
+                "name": "message",
+                "type": "str",
+                "value": "response",
+                "ui": {
+                    "icon": "font-awesome/fa-send-o",
+                    "label": {
+                        "en-US": "Message:"
+                    },
+                    "type": "input",
+                    "opts": {
+                        "types": [
+                            "str"
+                        ]
+                    }
+                }
+            }
+        ],
+        "meta": {
+            "module": "node-red-openai-completions",
+            "version": "2.0.0",
+            "author": "Bruno Leonardi <b.leonardi78@gmail.com>",
+            "desc": "OpenAI",
+            "keywords": "chat, ai, openai",
+            "license": "MIT"
+        },
+        "color": "#A6BBCF",
+        "inputLabels": [
+            "Prompt"
+        ],
+        "outputLabels": [
+            "Response",
+            "Debug"
+        ],
+        "icon": "font-awesome/fa-comments-o",
+        "status": {
+            "x": 500,
+            "y": 270,
+            "wires": [
+                {
+                    "id": "18d2a806929216d7",
+                    "port": 0
+                }
+            ]
+        }
+    },
+    {
+        "id": "a9f614a56d802d07",
+        "type": "function",
+        "z": "6ecf9ef35e876818",
+        "name": "OpenAI request",
+        "func": "//https://beta.openai.com/docs/api-reference/completions\n\n////////////////////////////////////////////////////////////////////\n////////////////////////////////////////////////////////////////////\n////////////////////////////////////////////////////////////////////\n\n/**\n * Restituisce il messaggio con la nuova proprietà\n * @param {string} path Proprietà oggetto (esempio: 'msg.payload.chiave1.chiave2')\n * @param {any} value Valore proprietà\n */\nfunction CreateMessage(path, value = null) {\n    var object = msg\n    RED.util.setMessageProperty(object, path, value, true)\n    return Object.assign(msg, object)\n}\n\n////////////////////////////////////////////////////////////////////\n////////////////////////////////////////////////////////////////////\n////////////////////////////////////////////////////////////////////\n\n/**@type {string} API key*/\nconst API_KEY = env.get(\"apikey\").trim() || ''\n\n/**@type {string} Modello del motore AI*/\nconst MODEL = env.get(\"model\") || 'text-davinci-003'\n\n/**@type {number} Affidabilità di risposta*/\nconst TEMPERATURE = env.get(\"temperature\") || 0.8\n\n/**@type {string} Testo da inviare*/\nconst PROMPT = (msg.openai_prompt && typeof msg.openai_prompt === 'string') ? msg.openai_prompt.trim() : env.get(\"prompt\").trim()\n\n/**@type {number} Lunghezza minima del testo da inviare*/\nconst PROMPT_LENGTH = env.get(\"prompt_length\") || 4\n\n/**@type {number} Lunghezza testo di risposta*/\nconst MAX_TOKENS = env.get(\"max_tokens\") || 60\n\n/**@type {string} Messaggio di output*/\nconst MESSAGE = env.get(\"message\").trim() || 'response'\n\n/**@type {string} ID utente*/\nconst USER = msg.openai_user || 'openai_0123456789'\n\n/**@type {string} Nome utente*/\nconst FIRST_NAME = msg.openai_first_name || 'UTENTE'\n\n////////////////////////////////////////////////////////////////////\n////////////////////////////////////////////////////////////////////\n////////////////////////////////////////////////////////////////////\n\nif (PROMPT.length >= PROMPT_LENGTH) {\n    node.status({ fill: \"green\", shape: \"dot\", text: \"Request\" })\n    msg.original_msg_backup = RED.util.cloneMessage(msg)\n    msg.url = env.get(\"url\").trim()\n\n    msg.headers = {\n        'Content-Type': 'application/json',\n        'Authorization': 'Bearer ' + API_KEY\n    }\n\n    msg.openai_prompt = PROMPT\n\n    msg.payload = {\n        //https://beta.openai.com/docs/api-reference/completions\n        \"model\": MODEL,\n        \"prompt\": FIRST_NAME + ':' + PROMPT + '\\nAI:',\n        \"max_tokens\": (MAX_TOKENS <= 0) ? 60 : MAX_TOKENS,\n        \"temperature\": (TEMPERATURE > 1) ? 1 : TEMPERATURE,\n        \"stop\": [FIRST_NAME + ':', ' AI:'],\n        \"user\": 'openai_' + USER\n    }\n\n    return [null, msg]\n} else {\n    delete msg.openai_prompt\n    delete msg.openai_user\n    delete msg.openai_first_name\n    CreateMessage(MESSAGE, PROMPT)\n    return [msg, null]\n}",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 280,
+        "y": 90,
+        "wires": [
+            [],
+            [
+                "cca45c846042e040"
+            ]
+        ],
+        "outputLabels": [
+            "Telegram",
+            "Request"
+        ]
+    },
+    {
+        "id": "cca45c846042e040",
+        "type": "http request",
+        "z": "6ecf9ef35e876818",
+        "name": "api.openai.com",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "query",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "x": 280,
+        "y": 150,
+        "wires": [
+            [
+                "3bb5366586afc80e"
+            ]
+        ]
+    },
+    {
+        "id": "3bb5366586afc80e",
+        "type": "function",
+        "z": "6ecf9ef35e876818",
+        "name": "OpenAI response",
+        "func": "/**@type {string} Messaggio di output*/\nconst MESSAGE = env.get(\"message\").trim() || 'response'\n\n////////////////////////////////////////////////////////////////////\n////////////////////////////////////////////////////////////////////\n////////////////////////////////////////////////////////////////////\n\nif (msg.statusCode == 200) {\n    node.status({ fill: \"green\", shape: \"dot\", text: \"Response OK\" })\n    var response = msg.payload.choices[0].text.trim()\n    response = response.replace(/(?:\\r\\n|\\r|\\n)/g, ' ').trim()\n    response += (msg.payload.choices[0].finish_reason == 'length') ? '...' : ''\n    response = response.trim()\n    response = (response == '' || response == '...') ? msg.openai_prompt : response\n    RED.util.setMessageProperty(msg.original_msg_backup, MESSAGE, response, true)\n} else {\n    node.status({ fill: \"red\", shape: \"dot\", text: \"Response ERROR\" })\n    RED.util.setMessageProperty(msg.original_msg_backup, MESSAGE, msg.openai_prompt, true)\n}\n\ndelete msg.original_msg_backup.openai_prompt\ndelete msg.original_msg_backup.openai_user\ndelete msg.original_msg_backup.openai_first_name\nreturn msg.original_msg_backup",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 290,
+        "y": 210,
+        "wires": [
+            []
+        ],
+        "outputLabels": [
+            "Telegram"
+        ]
+    },
+    {
+        "id": "9af77640692b2558",
+        "type": "status",
+        "z": "6ecf9ef35e876818",
+        "name": "",
+        "scope": [
+            "3bb5366586afc80e",
+            "626498afb4ac947b"
+        ],
+        "x": 215,
+        "y": 270,
+        "wires": [
+            [
+                "18d2a806929216d7"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "18d2a806929216d7",
+        "type": "delay",
+        "z": "6ecf9ef35e876818",
+        "name": "Rate limit",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "minutes",
+        "rate": "2",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 365,
+        "y": 270,
+        "wires": [
+            []
+        ],
+        "l": false
+    },
+    {
+        "id": "38baeffe6a51f2b7",
+        "type": "trigger",
+        "z": "6ecf9ef35e876818",
+        "name": "Reset status node",
+        "op1": "",
+        "op2": "0",
+        "op1type": "nul",
+        "op2type": "str",
+        "duration": "5",
+        "extend": true,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 145,
+        "y": 40,
+        "wires": [
+            [
+                "626498afb4ac947b"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "626498afb4ac947b",
+        "type": "function",
+        "z": "6ecf9ef35e876818",
+        "name": "Node status",
+        "func": "node.status({ fill: \"green\", shape: \"ring\", text: \"Ready\" })",
+        "outputs": 0,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\nnode.status({ fill: \"green\", shape: \"ring\", text: \"Ready\" })",
+        "finalize": "",
+        "libs": [],
+        "x": 270,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "afca6b9d0456255d",
+        "type": "delay",
+        "z": "6ecf9ef35e876818",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "500",
+        "timeoutUnits": "milliseconds",
+        "rate": "2",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "250",
+        "randomLast": "500",
+        "randomUnits": "milliseconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 145,
+        "y": 90,
+        "wires": [
+            [
+                "a9f614a56d802d07"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "88f66b3a0edb3b84",
+        "type": "subflow:6ecf9ef35e876818",
+        "z": "80a1712c85c98e95",
+        "name": "",
+        "x": 510,
+        "y": 240,
+        "wires": [
+            [],
+            []
+        ]
+    }
+]
